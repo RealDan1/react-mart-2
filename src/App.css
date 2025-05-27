@@ -8,13 +8,36 @@ body {
   color: #212529;
 }
 
+/* Make the app take full height and push footer to bottom */
+html,
+body,
+#root,
+.App {
+  height: 100%;
+  min-height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main,
+.main-content {
+  flex: 1 0 auto;
+}
+
 /* Header */
 /* ============================================ */
 .header {
   background-color: #fff;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   padding: 16px;
-  margin-bottom: 32px;
+  /* margin-bottom: 16px; */
+  display: flex;
+  align-items: center; /* <================ center header content vertically */
+  min-height: 64px; /* <================ ensure enough height for centering */
 }
 
 .logo {
@@ -65,6 +88,13 @@ nav ul li a:hover {
 
 .user {
   margin: 10px 10px 0 14px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center; /* <================ center logo/menu vertically */
+  justify-content: space-between;
+  width: 100%;
 }
 
 /* Products Section */
@@ -420,6 +450,7 @@ nav ul li a:hover {
   color: #0b5ed7;
 }
 
+/* Footer always at the bottom */
 footer {
   background-color: #f8f9fa;
   padding: 16px;
@@ -427,4 +458,6 @@ footer {
   color: #6c757d;
   font-size: 14px;
   border-top: 1px solid #dee2e6;
+  flex-shrink: 0;
+  margin-top: auto;
 }
