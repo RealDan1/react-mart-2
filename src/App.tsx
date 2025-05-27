@@ -16,6 +16,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
+      <footer>All rights reserved</footer>
     </div>
   );
 }
