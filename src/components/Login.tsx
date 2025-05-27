@@ -3,7 +3,7 @@ import { login } from '../store/userSlice';
 import type { RootState } from '../store/store';
 import { useState } from 'react';
 
-function Home() {
+function Login() {
   const dispatch = useDispatch();
   const { isLoggedIn, currentUser } = useSelector((state: RootState) => state.user);
   const [userInputUsername, setUserInputUsername] = useState('');
@@ -73,4 +73,4 @@ function Home() {
     </div>
   );
 }
-export default Home;
+export default Login;
