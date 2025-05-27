@@ -1,10 +1,25 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import type { RootState } from '../store/store';
-import './Header.css';
+import '../styles/Header.css';
+import { useState } from 'react';
 
 function Header() {
   const { currentUser, isLoggedIn } = useSelector((state: RootState) => state.user);
+  const cartState = useSelector((state: RootState) => state.cart);
+  const [showCartSummary, setShowCartSummary] = useState(false);
+
+  // Group cart items by title and count quantity
+  const cartSummary: { [title: string]: { item: any; quantity: number } } = {};
+  cartState.cart.forEach((item) => {
+    if (!cartSummary[item.title]) {
+      cartSummary[item.title] = { item, quantity: 1 };
+    } else {
+      cartSummary[item.title].quantity += 1;
+    }
+  });
+  const summaryItems = Object.values(cartSummary);
+
   return (
     <header className="header">
       <div className="header-content">
@@ -25,7 +40,11 @@ function Header() {
             </li>
           </ul>
         </nav>
-        <div className="cart-btn-container">
+        <div
+          className="cart-btn-container"
+          onMouseEnter={() => setShowCartSummary(true)}
+          onMouseLeave={() => setShowCartSummary(false)}
+        >
           <Link to="/cart">
             <button className="cart-btn" aria-label="Cart">
               <span className="cart-icon" aria-hidden="true">
@@ -42,6 +61,26 @@ function Header() {
               <span className="cart-label">Cart</span>
             </button>
           </Link>
+          {showCartSummary && (
+            <div className="cart-summary-popup">
+              <div className="cart-summary-items">
+                {summaryItems.length > 0 ? (
+                  summaryItems.slice(0, 3).map(({ item, quantity }) => (
+                    <div className="cart-summary-item" key={item.title}>
+                      <span>{item.title}</span>
+                      <span>x{quantity}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="cart-summary-empty">Cart is empty</div>
+                )}
+                {summaryItems.length > 3 && <div className="cart-summary-more">...and more</div>}
+              </div>
+              <Link to="/cart">
+                <button className="cart-summary-checkout-btn">Checkout</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </header>

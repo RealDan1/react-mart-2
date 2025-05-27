@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import DeliveryModal from './DeliveryModal';
 import { clearCart } from '../store/cartSlice';
 import type { RootState } from '../store/store';
@@ -63,13 +64,21 @@ function Cart() {
               </Button>
             </div>
           )}
-          <Button variant="danger" onClick={handleClearCart} style={{ marginTop: '1rem' }}>
-            Clear Cart
-          </Button>
+          <div className="cart-actions">
+            <Button variant="danger" onClick={handleClearCart} className="clear-cart-btn">
+              Clear Cart
+            </Button>
+            <Link to="/cart">
+              <Button variant="primary" className="checkout-btn">
+                Checkout
+              </Button>
+            </Link>
+          </div>
           {showModal && <DeliveryModal onClose={toggleModal} />}
         </>
       )}
     </div>
   );
 }
+
 export default Cart;
