@@ -23,9 +23,14 @@ export interface Product {
   src: string;
 }
 
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
 export interface CartState {
   products: Product[];
-  cart: Product[];
+  cartItems: CartItem[];
 }
 
 const initialState: CartState = {
@@ -121,7 +126,7 @@ const initialState: CartState = {
       src: seagateHDDImage,
     },
   ],
-  cart: [],
+  cartItems: [],
 };
 
 const cartSlice = createSlice({
@@ -129,10 +134,15 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<Product>) => {
-      state.cart.push(action.payload);
+      const existing = state.cartItems.find((item) => item.product.title === action.payload.title);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        state.cartItems.push({ product: action.payload, quantity: 1 });
+      }
     },
     clearCart: (state) => {
-      state.cart = [];
+      state.cartItems = [];
     },
   },
 });

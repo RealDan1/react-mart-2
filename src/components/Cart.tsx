@@ -7,14 +7,18 @@ import { clearCart } from '../store/cartSlice';
 import type { RootState } from '../store/store';
 
 function Cart() {
+  const cartState = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  const cartItems = useSelector((state: RootState) => state.cart.cart);
+
+  // cartItems is now an array of { product, quantity }
+  const cartItems = cartState.cartItems;
+
   const [shipmentMethod, setShipmentMethod] = useState('');
   const [showModal, setShowModal] = useState(false);
 
   let totalPrice = 0;
   for (let i = 0; i < cartItems.length; i++) {
-    totalPrice += cartItems[i].price;
+    totalPrice += cartItems[i].product.price * cartItems[i].quantity;
   }
   totalPrice = Math.round(totalPrice * 100) / 100;
 
@@ -26,22 +30,20 @@ function Cart() {
     setShowModal(!showModal);
   };
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
-
   return (
     <div className="cart">
-      <h2>Shopping Cart</h2>
+      <h2>Your Cart</h2>
       {cartItems.length === 0 ? (
-        <p>No items in cart</p>
+        <p>Your cart is empty.</p>
       ) : (
         <>
-          {cartItems.map((item, index) => (
+          {cartItems.map(({ product, quantity }, index) => (
             <Card key={index} className="cart-item">
               <Card.Body>
-                <Card.Title>{item.title}</Card.Title>
-                <Card.Text>Price: R{item.price}</Card.Text>
+                <Card.Title>{product.title}</Card.Title>
+                <Card.Text>{product.description}</Card.Text>
+                <Card.Text>Price: R{product.price.toFixed(2)}</Card.Text>
+                <Card.Text>Quantity: {quantity}</Card.Text>
               </Card.Body>
             </Card>
           ))}
@@ -65,7 +67,7 @@ function Cart() {
             </div>
           )}
           <div className="cart-actions">
-            <Button variant="danger" onClick={handleClearCart} className="clear-cart-btn">
+            <Button variant="danger" onClick={() => dispatch(clearCart())} className="clear-cart-btn">
               Clear Cart
             </Button>
             <Link to="/cart">

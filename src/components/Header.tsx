@@ -9,16 +9,8 @@ function Header() {
   const cartState = useSelector((state: RootState) => state.cart);
   const [showCartSummary, setShowCartSummary] = useState(false);
 
-  // Group cart items by title and count quantity
-  const cartSummary: { [title: string]: { item: any; quantity: number } } = {};
-  cartState.cart.forEach((item) => {
-    if (!cartSummary[item.title]) {
-      cartSummary[item.title] = { item, quantity: 1 };
-    } else {
-      cartSummary[item.title].quantity += 1;
-    }
-  });
-  const summaryItems = Object.values(cartSummary);
+  // cartItems is now an array of { product, quantity }
+  const summaryItems = cartState.cartItems;
 
   return (
     <header className="header">
@@ -65,9 +57,9 @@ function Header() {
             <div className="cart-summary-popup">
               <div className="cart-summary-items">
                 {summaryItems.length > 0 ? (
-                  summaryItems.slice(0, 3).map(({ item, quantity }) => (
-                    <div className="cart-summary-item" key={item.title}>
-                      <span>{item.title}</span>
+                  summaryItems.slice(0, 3).map(({ product, quantity }) => (
+                    <div className="cart-summary-item" key={product.title}>
+                      <span>{product.title}</span>
                       <span>x{quantity}</span>
                     </div>
                   ))
