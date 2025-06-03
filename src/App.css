@@ -245,6 +245,13 @@ nav ul li a:hover {
   margin: 0 !important;
 }
 
+.clear-cart-btn:hover, .clear-cart-btn:focus, .clear-cart-btn:active {
+  background-color: #0b5ed7 !important;
+  border-color: #0b5ed7 !important;
+  color: #fff !important;
+}
+
+
 .cart-actions {
   display: flex;
   flex-direction: row;
