@@ -226,38 +226,91 @@ nav ul li a:hover {
   font-size: 22px;
 }
 
-.clear-cart-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
+.clear-cart-btn {
+  width: 140px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  color: #fff !important;
   background-color: #0d6efd !important;
-  border: #0d6efd !important;
-  border-radius: 6px;
-  cursor: pointer;
+  border: 2px solid #0d6efd !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  height: 44px !important;
+  line-height: 22px !important;
+  margin: 0 !important;
 }
+
+.cart-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 32px;
+  justify-content: center;
+  align-items: center;
+}
+.cart-actions > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .clear-cart-button:hover {
   background-color: #0b5ed7 !important;
+  /* Do not change border color on hover to prevent width jump */
 }
 
 .checkout-button {
   display: inline-block;
-  margin-top: 20px;
-  margin-left: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
+  margin: 0 !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  color: #fff !important;
   background-color: #0d6efd !important;
-  border: #0d6efd !important;
-  border-radius: 6px;
-  cursor: pointer;
+  border: 2px solid #0d6efd !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  transition: none !important;
+  flex: 1 1 0% !important;
 }
 
-.checkout-button:hover {
-  background-color: #0b5ed7 !important;
+.cart-actions .checkout-btn,
+.cart-actions .checkout-btn:hover,
+.cart-actions .checkout-btn:focus,
+.cart-actions .checkout-btn:active {
+  width: 140px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  border-radius: 6px !important;
+  background-color: #0d6efd !important;
+  border: 2px solid #0d6efd !important;
+  color: #fff !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  text-align: center !important;
+  height: 44px !important;
+  line-height: 22px !important;
 }
+
+.cart-actions .checkout-btn:hover {
+  background-color: #0b5ed7 !important;
+  border: 2px solid #0b5ed7 !important;
+}
+
+
+
 
 /* Shipment Section */
 /* ============================================ */
@@ -304,7 +357,8 @@ nav ul li a:hover {
 /* Form Styles */
 /* ============================================ */
 .register-form {
-  max-width: 500px;
+  max-width: 700px;
+  width: 100%;
   margin: 32px auto;
   padding: 32px;
   background-color: #fff;
@@ -380,8 +434,9 @@ nav ul li a:hover {
   padding: 24px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   margin-bottom: 70px;
+  border: solid 1px #dee2e6;
 }
 
 .reactmart-summary h2 {
@@ -398,9 +453,10 @@ nav ul li a:hover {
 
 .customer-reviews {
   padding: 24px;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: solid 1px #dee2e6;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .customer-reviews h2 {
